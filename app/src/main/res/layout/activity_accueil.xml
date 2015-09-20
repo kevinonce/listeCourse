@@ -22,4 +22,14 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="55dp" />
 
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/addCourseImage"
+        android:layout_below="@+id/textView"
+        android:layout_alignRight="@+id/listCourses"
+        android:layout_alignEnd="@+id/listCourses"
+        android:src="@mipmap/add_list"
+        android:onClick="addListClick" />
+
 </RelativeLayout>

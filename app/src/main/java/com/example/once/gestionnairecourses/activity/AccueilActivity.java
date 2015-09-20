@@ -1,22 +1,17 @@
 package com.example.once.gestionnairecourses.activity;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
 
 import com.example.once.gestionnairecourses.R;
 import com.example.once.gestionnairecourses.adapter.ListeCourseAdapter;
 import com.example.once.gestionnairecourses.bdd.CourseDbHelper;
-import com.example.once.gestionnairecourses.pojo.Article;
 import com.example.once.gestionnairecourses.pojo.ListeCourse;
 import com.j256.ormlite.android.apptools.OrmLiteBaseActivity;
-import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class AccueilActivity extends OrmLiteBaseActivity<CourseDbHelper> {
 
@@ -29,7 +24,7 @@ public class AccueilActivity extends OrmLiteBaseActivity<CourseDbHelper> {
 
         RuntimeExceptionDao<ListeCourse, Long> daoListeCourse = getHelper().getRuntimeExceptionDao(ListeCourse.class);
 
-        ListeCourse listeAuchan = new ListeCourse("Auchan");
+        /*ListeCourse listeAuchan = new ListeCourse("Auchan");
         ListeCourse listeLidl = new ListeCourse("Lidl");
 
         daoListeCourse.create(listeAuchan);
@@ -43,7 +38,7 @@ public class AccueilActivity extends OrmLiteBaseActivity<CourseDbHelper> {
 
         daoArticle.create(oeufs);
         daoArticle.create(filetPoulet);
-        daoArticle.create(saumon);
+        daoArticle.create(saumon);*/
 
 
         final ListeCourseAdapter adapter = new ListeCourseAdapter(AccueilActivity.this, daoListeCourse.queryForAll());
@@ -71,5 +66,11 @@ public class AccueilActivity extends OrmLiteBaseActivity<CourseDbHelper> {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void addListClick(View vue){
+
+        //custom dialog box
+
     }
 }
