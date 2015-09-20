@@ -1,26 +1,46 @@
 package com.example.once.gestionnairecourses.pojo;
 
+import com.j256.ormlite.dao.ForeignCollection;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.field.ForeignCollectionField;
+import com.j256.ormlite.table.DatabaseTable;
+
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
  * Created by once on 14/09/15.
  */
+@DatabaseTable(tableName = "listeCourse")
 public class ListeCourse {
 
+
+    @DatabaseField(generatedId = true)
+    private Long id;
+
+    @DatabaseField
     private String name;
-    private List<Article> listeArticle;
+
+    @ForeignCollectionField
+    private ForeignCollection<Article> Articles;
 
     public ListeCourse(){
-        super();
-        listeArticle = new ArrayList<>();
 
     }
-    public ListeCourse(String name) {
-        super();
+
+    public ListeCourse(String name){
         this.name = name;
-        listeArticle = new ArrayList<>();
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
@@ -29,22 +49,21 @@ public class ListeCourse {
         this.name = name;
     }
 
-
-    public List<Article> getListeArticle() {
-        return listeArticle;
+    public ForeignCollection<Article> getArticles() {
+        return Articles;
     }
 
-    public void setListeArticle(List<Article> listeArticle) {
-        this.listeArticle = listeArticle;
+    @Override
+    public int hashCode() {
+        return name.hashCode();
     }
 
-    public void addArticle(Article article){
-        listeArticle.add(article);
+    @Override
+    public boolean equals(Object other) {
+        if (other == null || other.getClass() != getClass()) {
+            return false;
+        }
+        return name.equals(((ListeCourse) other).name);
     }
-
-    public void removeArticle(Article article){
-        listeArticle.remove(article);
-    }
-
 
 }

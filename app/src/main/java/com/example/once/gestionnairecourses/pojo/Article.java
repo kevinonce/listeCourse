@@ -1,23 +1,49 @@
 package com.example.once.gestionnairecourses.pojo;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
 /**
  * Created by once on 14/09/15.
  */
+
+@DatabaseTable(tableName = "article")
+
 public class Article {
 
+    @DatabaseField(generatedId = true)
+    private Long id;
+
+    @DatabaseField
     private String name;
+
+    @DatabaseField
     private int quantity;
+
+    @DatabaseField
     private boolean isSelected;
 
+    @DatabaseField(foreign = true)
+    ListeCourse listeCourse;
+
     public Article(){
-        super();
+
     }
 
-    public Article(String nameTp, int quantityTp, boolean isSelectedTp){
+    public Article(ListeCourse liste, String nameTp, int quantityTp, boolean isSelectedTp){
         super();
+        this.listeCourse = liste;
         this.name = nameTp;
         this.quantity = quantityTp;
         this.isSelected = isSelectedTp;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -44,4 +70,11 @@ public class Article {
         this.isSelected = isSelected;
     }
 
+    public ListeCourse getListeCourse() {
+        return listeCourse;
+    }
+
+    public void setListeCourse(ListeCourse listeCourse) {
+        this.listeCourse = listeCourse;
+    }
 }
