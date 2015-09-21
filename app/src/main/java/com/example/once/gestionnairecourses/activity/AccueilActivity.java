@@ -1,9 +1,13 @@
 package com.example.once.gestionnairecourses.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import com.example.once.gestionnairecourses.R;
@@ -15,15 +19,15 @@ import com.j256.ormlite.dao.RuntimeExceptionDao;
 
 public class AccueilActivity extends OrmLiteBaseActivity<CourseDbHelper> {
 
+    private RuntimeExceptionDao<ListeCourse, Long> daoListeCourse;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accueil);
 
         ListView listeCourses = (ListView) findViewById(R.id.listCourses);
-
-        RuntimeExceptionDao<ListeCourse, Long> daoListeCourse = getHelper().getRuntimeExceptionDao(ListeCourse.class);
-
+        daoListeCourse = getHelper().getRuntimeExceptionDao(ListeCourse.class);
         /*ListeCourse listeAuchan = new ListeCourse("Auchan");
         ListeCourse listeLidl = new ListeCourse("Lidl");
 
@@ -70,7 +74,25 @@ public class AccueilActivity extends OrmLiteBaseActivity<CourseDbHelper> {
 
     public void addListClick(View vue){
 
-        //custom dialog box
+        AlertDialog.Builder builder = new AlertDialog.Builder(AccueilActivity.this);
+        LayoutInflater inflater = AccueilActivity.this.getLayoutInflater();
+        final View dialogVue = inflater.inflate(R.layout.dialog_box_ajout_liste, null);
+        builder.setView(dialogVue);
 
+        builder.setPositiveButton("Ajouter", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                EditText nomListe = (EditText)dialogVue.findViewById(R.id.nomListeDialog);
+                ListeCourse liste = new ListeCourse(nomListe.getText().toString());
+                daoListeCourse.create(liste);
+            }
+        });
+        builder.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User cancelled the dialog
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }
