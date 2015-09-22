@@ -20,7 +20,7 @@
         android:id="@+id/listCourses"
         android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="55dp" />
+        android:layout_marginTop="55dp"/>
 
     <ImageButton
         android:layout_width="wrap_content"
