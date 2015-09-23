@@ -33,8 +33,9 @@ public class AccueilActivity extends OrmLiteBaseActivity<CourseDbHelper> {
         listeCourses.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ListeCourse listeCourseDelete = (ListeCourse) listeCourses.getItemAtPosition(position);
+                ListeCourse listeCourseSelected = (ListeCourse) listeCourses.getItemAtPosition(position);
                 Intent intent = new Intent(AccueilActivity.this,ListeCourseActivity.class);
+                intent.putExtra("idListe",listeCourseSelected.getId());
                 startActivity(intent);
             }
         });
