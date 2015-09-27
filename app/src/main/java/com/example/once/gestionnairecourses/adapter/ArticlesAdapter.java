@@ -1,6 +1,7 @@
 package com.example.once.gestionnairecourses.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,8 +44,26 @@ public class ArticlesAdapter extends ArrayAdapter<Article> {
 
         //il ne reste plus qu'à remplir notre vue
         viewHolder.nomArticle.setText(article.getName());
-        viewHolder.quantiteArticle.setText("Quantité: article.getQuantity()");
-        viewHolder.selectionArticle.setSelected(article.isSelected());
+        viewHolder.quantiteArticle.setText("Quantité: " + article.getQuantity());
+        viewHolder.selectionArticle.setChecked(article.isSelected());
+        viewHolder.selectionArticle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CheckBox cb = (CheckBox) v;
+                Article article = (Article) cb.getTag();
+                article.setIsSelected(((CheckBox) v).isChecked());
+                ArticlesAdapter.this.notifyDataSetChanged();
+
+            }
+        });
+
+        if(viewHolder.selectionArticle.isChecked()){
+            convertView.setBackgroundColor(Color.GREEN);
+        }else{
+            convertView.setBackgroundColor(Color.RED);
+        }
+        ((ArticleViewHolder) convertView.getTag()).selectionArticle.setTag(article);
+
         return convertView;
     }
 

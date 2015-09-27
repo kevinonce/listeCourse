@@ -30,6 +30,7 @@ public class AccueilActivity extends OrmLiteBaseActivity<CourseDbHelper> {
         setContentView(R.layout.activity_accueil);
 
         final ListView listeCourses = (ListView) findViewById(R.id.listCourses);
+
         listeCourses.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -42,33 +43,31 @@ public class AccueilActivity extends OrmLiteBaseActivity<CourseDbHelper> {
 
         listeCourses.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                ListeCourse listeCourseDelete = (ListeCourse) listeCourses.getItemAtPosition(position);
-                daoListeCourse.delete(listeCourseDelete);
-                adapter.remove(listeCourseDelete);
-                adapter.notifyDataSetChanged();
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
 
+                AlertDialog.Builder builder = new AlertDialog.Builder(AccueilActivity.this);
+                builder.setMessage("Voulez-vous vraiment supprimer cette liste ?");
+                builder.setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        ListeCourse listeCourseDelete = (ListeCourse) listeCourses.getItemAtPosition(position);
+                        daoListeCourse.delete(listeCourseDelete);
+                        adapter.remove(listeCourseDelete);
+                        adapter.notifyDataSetChanged();
+                    }
+                });
+                builder.setNegativeButton("Non", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // User cancelled the dialog
+                    }
+                });
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
                 return true;
             }
         });
 
         daoListeCourse = getHelper().getRuntimeExceptionDao(ListeCourse.class);
-        /*ListeCourse listeAuchan = new ListeCourse("Auchan");
-        ListeCourse listeLidl = new ListeCourse("Lidl");
-
-        daoListeCourse.create(listeAuchan);
-        daoListeCourse.create(listeLidl);
-
-        RuntimeExceptionDao<Article, Long> daoArticle = getHelper().getRuntimeExceptionDao(Article.class);
-
-        Article oeufs = new Article(listeAuchan, "oeufs", 12, false);
-        Article filetPoulet = new Article(listeAuchan, "1.5kg Filet de poulet", 2, false);
-        Article saumon = new Article(listeLidl, "280 gr de saumon", 1, false);
-
-        daoArticle.create(oeufs);
-        daoArticle.create(filetPoulet);
-        daoArticle.create(saumon);*/
-
 
         adapter = new ListeCourseAdapter(AccueilActivity.this, daoListeCourse.queryForAll());
 
