@@ -37,8 +37,6 @@ public class ListeCourseActivity extends OrmLiteBaseActivity<CourseDbHelper> {
 
         final ListView listeViewArticle = (ListView) findViewById(R.id.listViewArticle);
 
-        CheckBox checkSelection = (CheckBox) listeViewArticle.findViewById(R.id.articleSelection);
-
         listeViewArticle.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -58,14 +56,12 @@ public class ListeCourseActivity extends OrmLiteBaseActivity<CourseDbHelper> {
                         String nom = nomListe.getText().toString();
                         EditText quantiteArticleEdit = (EditText)dialogVue.findViewById(R.id.quantiteArticleDialog);
                         CheckBox necessaire = (CheckBox)dialogVue.findViewById(R.id.necessaireArticleDialog);
-                        if(nom.trim().length() > 0 && nom.trim().length() < 25) {
+                        if(verifierDonnees(nom,quantiteArticleEdit.getText().toString())) {
                             articleCourant.setName(nom);
                             articleCourant.setQuantity(Integer.valueOf(quantiteArticleEdit.getText().toString()));
                             articleCourant.setIsSelected(necessaire.isChecked());
                             daoArticle.update(articleCourant);
                             adapter.notifyDataSetChanged();
-                        }else{
-                            Toast.makeText(ListeCourseActivity.this, "Nom incorrect, la taille doit être comprise entre 0 et 25 caractères !", Toast.LENGTH_LONG).show();
                         }
                     }
                 });
@@ -159,13 +155,11 @@ public class ListeCourseActivity extends OrmLiteBaseActivity<CourseDbHelper> {
                 String nom = nomListe.getText().toString();
                 EditText quantiteArticleEdit = (EditText)dialogVue.findViewById(R.id.quantiteArticleDialog);
                 CheckBox necessaire = (CheckBox)dialogVue.findViewById(R.id.necessaireArticleDialog);
-                if(nom.trim().length() > 0 && nom.trim().length() < 25) {
+                if(verifierDonnees(nom,quantiteArticleEdit.getText().toString())) {
                     Article article = new Article(currentListe, nom, Integer.valueOf(quantiteArticleEdit.getText().toString()), necessaire.isChecked());
                     daoArticle.create(article);
                     adapter.add(article);
                     adapter.notifyDataSetChanged();
-                }else{
-                    Toast.makeText(ListeCourseActivity.this, "Nom incorrect, la taille doit être comprise entre 0 et 25 caractères !", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -177,5 +171,26 @@ public class ListeCourseActivity extends OrmLiteBaseActivity<CourseDbHelper> {
 
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    private boolean verifierDonnees(String nom, String quantite){
+        StringBuffer message = new StringBuffer();
+        if(nom.trim().length() > 0 && nom.trim().length() < 25){
+            message.append("Nom incorrect, la taille doit être comprise entre 0 et 25 caractères !");
+        }
+
+        try{
+            Integer.valueOf(quantite);
+        }catch (NumberFormatException ex){
+            message.append("La quantité doit être un entier supérieur ou égal à 0");
+        }
+
+        if(message.length() > 0){
+            Toast.makeText(ListeCourseActivity.this, message.toString(), Toast.LENGTH_LONG).show();
+            return false;
+        }else{
+            return true;
+        }
+
     }
 }
