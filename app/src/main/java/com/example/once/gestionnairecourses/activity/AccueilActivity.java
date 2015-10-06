@@ -88,11 +88,6 @@ public class AccueilActivity extends OrmLiteBaseActivity<CourseDbHelper> {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -102,7 +97,7 @@ public class AccueilActivity extends OrmLiteBaseActivity<CourseDbHelper> {
         LayoutInflater inflater = AccueilActivity.this.getLayoutInflater();
         final View dialogVue = inflater.inflate(R.layout.dialog_box_ajout_liste, null);
         builder.setView(dialogVue);
-
+        builder.setTitle("Nouvelle liste de course");
         builder.setPositiveButton("Ajouter", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 EditText nomListe = (EditText)dialogVue.findViewById(R.id.nomListeDialog);
@@ -125,5 +120,11 @@ public class AccueilActivity extends OrmLiteBaseActivity<CourseDbHelper> {
 
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        adapter.notifyDataSetChanged();
     }
 }
