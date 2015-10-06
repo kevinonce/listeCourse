@@ -170,12 +170,15 @@ public class ListeCourseActivity extends OrmLiteBaseActivity<CourseDbHelper> {
 
     private boolean verifierDonnees(String nom, String quantite){
         StringBuffer message = new StringBuffer();
-        if(nom.trim().length() > 0 && nom.trim().length() < 25){
+        if(nom.trim().length() <= 0 || (nom.trim().length() > 0 && nom.trim().length() < 25)){
             message.append("Nom incorrect, la taille doit être comprise entre 0 et 25 caractères !");
         }
 
         try{
-            Integer.valueOf(quantite);
+            int quantiteConvert = Integer.valueOf(quantite);
+            if(quantiteConvert < 1){
+                throw new NumberFormatException();
+            }
         }catch (NumberFormatException ex){
             message.append("La quantité doit être un entier supérieur ou égal à 0");
         }
