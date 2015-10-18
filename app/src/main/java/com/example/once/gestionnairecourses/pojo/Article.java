@@ -18,7 +18,7 @@ public class Article{
     private String name;
 
     @DatabaseField
-    private int quantity;
+    private Float quantity;
 
     @DatabaseField
     private boolean isSelected;
@@ -30,7 +30,7 @@ public class Article{
 
     }
 
-    public Article(ListeCourse liste, String nameTp, int quantityTp, boolean isSelectedTp){
+    public Article(ListeCourse liste, String nameTp, Float quantityTp, boolean isSelectedTp){
         super();
         this.listeCourse = liste;
         this.name = nameTp;
@@ -54,11 +54,11 @@ public class Article{
         this.name = name;
     }
 
-    public int getQuantity() {
+    public Float getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(Float quantity) {
         this.quantity = quantity;
     }
 

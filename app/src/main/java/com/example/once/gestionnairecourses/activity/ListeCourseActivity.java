@@ -49,6 +49,8 @@ public class ListeCourseActivity extends OrmLiteBaseActivity<CourseDbHelper> {
 
                 ((EditText)dialogVue.findViewById(R.id.nomArticleDialog)).setText(articleCourant.getName());
                 ((CheckBox)dialogVue.findViewById(R.id.necessaireArticleDialog)).setChecked(articleCourant.isSelected());
+                ((EditText)dialogVue.findViewById(R.id.quantiteArticleDialog)).setText(articleCourant.getQuantity().toString());
+
 
                 builder.setPositiveButton("Modifier", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
@@ -58,7 +60,7 @@ public class ListeCourseActivity extends OrmLiteBaseActivity<CourseDbHelper> {
                         CheckBox necessaire = (CheckBox)dialogVue.findViewById(R.id.necessaireArticleDialog);
                         if(verifierDonnees(nom,quantiteArticleEdit.getText().toString())) {
                             articleCourant.setName(nom);
-                            articleCourant.setQuantity(Integer.valueOf(quantiteArticleEdit.getText().toString()));
+                            articleCourant.setQuantity(Float.valueOf(quantiteArticleEdit.getText().toString()));
                             articleCourant.setIsSelected(necessaire.isChecked());
                             daoArticle.update(articleCourant);
                             adapter.notifyDataSetChanged();
@@ -151,7 +153,7 @@ public class ListeCourseActivity extends OrmLiteBaseActivity<CourseDbHelper> {
                 EditText quantiteArticleEdit = (EditText)dialogVue.findViewById(R.id.quantiteArticleDialog);
                 CheckBox necessaire = (CheckBox)dialogVue.findViewById(R.id.necessaireArticleDialog);
                 if(verifierDonnees(nom,quantiteArticleEdit.getText().toString())) {
-                    Article article = new Article(currentListe, nom, Integer.valueOf(quantiteArticleEdit.getText().toString()), necessaire.isChecked());
+                    Article article = new Article(currentListe, nom, Float.valueOf(quantiteArticleEdit.getText().toString()), necessaire.isChecked());
                     daoArticle.create(article);
                     adapter.add(article);
                     adapter.notifyDataSetChanged();
@@ -175,12 +177,12 @@ public class ListeCourseActivity extends OrmLiteBaseActivity<CourseDbHelper> {
         }
 
         try{
-            int quantiteConvert = Integer.valueOf(quantite);
-            if(quantiteConvert < 1){
+            Float quantiteConvert = Float.valueOf(quantite);
+            if(quantiteConvert <= 0){
                 throw new NumberFormatException();
             }
         }catch (NumberFormatException ex){
-            message.append("\nLa quantité doit être un entier supérieur ou égal à 0");
+            message.append("\nLa quantité doit être un nombre décimal supérieur à 0");
         }
 
         if(message.length() > 0){

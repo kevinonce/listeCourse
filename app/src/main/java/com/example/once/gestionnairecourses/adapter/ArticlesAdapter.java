@@ -45,7 +45,8 @@ public class ArticlesAdapter extends ArrayAdapter<Article> {
 
         //il ne reste plus qu'à remplir notre vue
         viewHolder.nomArticle.setText(article.getName());
-        viewHolder.quantiteArticle.setText("Quantité: " + article.getQuantity());
+
+        viewHolder.quantiteArticle.setText("Quantité: " + removeZeroIfExist(article.getQuantity()));
         viewHolder.selectionArticle.setChecked(article.isSelected());
         viewHolder.selectionArticle.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,6 +71,17 @@ public class ArticlesAdapter extends ArrayAdapter<Article> {
         return convertView;
     }
 
+    private String removeZeroIfExist(Float quantite){
+
+        String quantiteS = quantite.toString();
+        if(quantiteS.endsWith(".0")){
+            return quantiteS.substring(0,quantiteS.indexOf("."));
+        }else{
+            return quantiteS;
+        }
+
+
+    }
     private class ArticleViewHolder{
         public TextView nomArticle;
         public TextView quantiteArticle;
