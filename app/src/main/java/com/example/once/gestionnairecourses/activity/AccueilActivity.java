@@ -125,6 +125,8 @@ public class AccueilActivity extends OrmLiteBaseActivity<CourseDbHelper> {
     @Override
     public void onResume(){
         super.onResume();
+        adapter.clear();
+        adapter.addAll(daoListeCourse.queryForAll());
         adapter.notifyDataSetChanged();
     }
 }

@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.once.gestionnairecourses.R;
 import com.example.once.gestionnairecourses.pojo.Article;
+import com.j256.ormlite.dao.RuntimeExceptionDao;
 
 import java.util.List;
 
@@ -19,9 +20,11 @@ import java.util.List;
  * Created by once on 23/09/15.
  */
 public class ArticlesAdapter extends ArrayAdapter<Article> {
+    private RuntimeExceptionDao<Article, Long> daoArticle;
 
-    public ArticlesAdapter(Context context, List<Article> listeArticles) {
+    public ArticlesAdapter(Context context, List<Article> listeArticles, RuntimeExceptionDao<Article, Long> daoArticle) {
         super(context, 0, listeArticles);
+        this.daoArticle = daoArticle;
     }
 
     @Override
@@ -55,6 +58,7 @@ public class ArticlesAdapter extends ArrayAdapter<Article> {
                 Article article = (Article) cb.getTag();
                 article.setIsSelected(((CheckBox) v).isChecked());
                 ArticlesAdapter.this.notifyDataSetChanged();
+                daoArticle.update(article);
 
             }
         });

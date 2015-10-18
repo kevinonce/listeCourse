@@ -111,7 +111,7 @@ public class ListeCourseActivity extends OrmLiteBaseActivity<CourseDbHelper> {
         daoListeCourse  = getHelper().getRuntimeExceptionDao(ListeCourse.class);
         currentListe = daoListeCourse.queryForId(idListe);
 
-        adapter = new ArticlesAdapter(ListeCourseActivity.this, daoArticle.queryForEq("listeCourse_id",currentListe ));
+        adapter = new ArticlesAdapter(ListeCourseActivity.this, daoArticle.queryForEq("listeCourse_id",currentListe ),daoArticle);
 
         final TextView title = (TextView) findViewById(R.id.nomListeCourseTitle);
         title.setText(currentListe.getName());

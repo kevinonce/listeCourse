@@ -15,8 +15,7 @@
     android:text="Listes de course"
     android:id="@+id/nomListeCourseTitle"
         android:layout_alignTop="@+id/imageButton"
-        android:layout_centerHorizontal="true"
-        android:background="#F0C300" />
+        android:layout_centerHorizontal="true"/>
 
     <ListView
         android:layout_width="wrap_content"
