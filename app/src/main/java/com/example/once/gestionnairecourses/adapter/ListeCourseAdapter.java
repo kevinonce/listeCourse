@@ -42,7 +42,6 @@ public class ListeCourseAdapter extends ArrayAdapter<ListeCourse>{
         //il ne reste plus qu'à remplir notre vue
         viewHolder.nomListe.setText(listeCourse.getName());
         viewHolder.nbrArticle.setText(listeCourse.getArticles() != null ? listeCourse.getArticles().size()+" article(s)" : " 0 article(s)");
-
         return convertView;
     }
 

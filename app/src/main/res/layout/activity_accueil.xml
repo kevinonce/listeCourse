@@ -14,14 +14,14 @@
         android:id="@+id/textView"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:background="#FF0000" />
+        android:background="#F0C300" />
 
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/listCourses"
         android:clickable="true"
-        android:divider="#FF0000"
+        android:divider="#F0C300"
         android:dividerHeight="1dp"
         android:layout_below="@+id/addCourseImage"
         android:layout_alignParentLeft="true"

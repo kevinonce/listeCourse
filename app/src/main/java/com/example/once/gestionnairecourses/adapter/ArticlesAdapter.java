@@ -58,9 +58,9 @@ public class ArticlesAdapter extends ArrayAdapter<Article> {
         });
 
         if(viewHolder.selectionArticle.isChecked()){
-            convertView.setBackgroundColor(Color.parseColor("#27E660"));
+            convertView.setBackgroundColor(Color.parseColor("#5AC92A"));
         }else{
-            convertView.setBackgroundColor(Color.parseColor("#E62727"));
+            convertView.setBackgroundColor(Color.parseColor("#ED0000"));
         }
         ((ArticleViewHolder) convertView.getTag()).selectionArticle.setTag(article);
 

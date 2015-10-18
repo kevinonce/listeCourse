@@ -9,7 +9,7 @@ import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName = "article")
 
-public class Article {
+public class Article{
 
     @DatabaseField(generatedId = true)
     private Long id;
