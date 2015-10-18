@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/listCourses"
         android:clickable="true"
-        android:divider="#F0C300"
+        android:divider="#FF3333"
         android:dividerHeight="1dp"
         android:layout_below="@+id/addCourseImage"
         android:layout_alignParentLeft="true"

@@ -2,6 +2,7 @@ package com.example.once.gestionnairecourses.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,9 +59,11 @@ public class ArticlesAdapter extends ArrayAdapter<Article> {
         });
 
         if(viewHolder.selectionArticle.isChecked()){
-            convertView.setBackgroundColor(Color.parseColor("#5AC92A"));
+            convertView.setBackgroundColor(Color.parseColor("#F0C300"));
+            viewHolder.nomArticle.setPaintFlags(viewHolder.nomArticle.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
         }else{
-            convertView.setBackgroundColor(Color.parseColor("#ED0000"));
+            convertView.setBackgroundColor(Color.parseColor("#fffa7a"));
+            viewHolder.nomArticle.setPaintFlags(viewHolder.nomArticle.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         }
         ((ArticleViewHolder) convertView.getTag()).selectionArticle.setTag(article);
 
