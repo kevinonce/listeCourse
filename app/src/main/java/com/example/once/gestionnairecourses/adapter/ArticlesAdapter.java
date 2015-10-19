@@ -64,10 +64,10 @@ public class ArticlesAdapter extends ArrayAdapter<Article> {
         });
 
         if(viewHolder.selectionArticle.isChecked()){
-            convertView.setBackgroundColor(Color.parseColor("#F0C300"));
+            convertView.setBackgroundColor(Color.parseColor("#F9E778"));
             viewHolder.nomArticle.setPaintFlags(viewHolder.nomArticle.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
         }else{
-            convertView.setBackgroundColor(Color.parseColor("#fffa7a"));
+            convertView.setBackgroundColor(Color.parseColor("#F7F5BB"));
             viewHolder.nomArticle.setPaintFlags(viewHolder.nomArticle.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         }
         ((ArticleViewHolder) convertView.getTag()).selectionArticle.setTag(article);
