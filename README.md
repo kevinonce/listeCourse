@@ -1,5 +1,8 @@
 # listeCourse
 
+Application de gestion de listes de course
+
+
 Écran affichage des listes de course:
 
 ![listecourse](https://cloud.githubusercontent.com/assets/7383512/10607043/09acc8c8-7737-11e5-901d-8bb05c7171b9.png)
